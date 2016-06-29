@@ -1,0 +1,67 @@
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\ifgit
+  \usepackage[mark]{gitinfo2}
+\fi
+\usepackage{ae}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+%%   Fuer anspruchsvolle Tabellen   %%
+\usepackage{longtable, colortbl}
+\usepackage{multicol, multirow}
+
+\usepackage[pdftitle={\@title},pdfauthor={\@author},pdftex,bookmarksopen,bookmarksnumbered]{hyperref}
+\usepackage[pdftex]{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{arrows,shapes,fit,positioning,decorations,backgrounds,shadows}
+
+\pdfcompresslevel=9
+
+% Code-Hervorhebung
+% Quellcode
+\usepackage{verbatim}            % Quellcode einbinden (\verbatiminput) standardpaket
+\usepackage{moreverb}
+% PseudoCode
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+%\usepackage{algorithmicx}
+
+\floatname{algorithm}{\algo}
+\algrenewcommand{\algorithmiccomment}[1]{\hskip1em\textcolor{gray!60}{$\rhd$ #1}}
+\renewcommand{\listalgorithmname}{\loa}
+\def\algorithmautorefname{\algo}
+
+
+%%   intoc zur Aufnhame des Abkuerzungs- und Symbolverzeichnisses ins Inhaltsverzeichnis
+\usepackage[intoc]{nomencl}
+\setlength{\nomlabelwidth}{.20\hsize}
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+\setlength{\nomitemsep}{-\parsep}
+\makenomenclature
+
+\renewcommand{\nomname}{\abbr}
+
+%%   Hervorhebung der Abkuerzungsbuchstaben   %%
+\usepackage[normalem]{ulem}
+\newcommand{\m}[1]{\uline{#1}}
+
+% ausf\"{u}hrlichere Fehlermeldungen
+\errorcontextlines=999
+%
+% Page-Layout: A4 aus Header
+% Alternative
+\setlength\headheight{14pt}
+\setlength\topmargin{-15,4mm}
+\setlength\oddsidemargin{-0,4mm}
+\setlength\evensidemargin{-0,4mm}
+\setlength\textwidth{160mm}
+\setlength\textheight{252mm}
+%
+%% Absatzeinstellungen
+\setlength\parindent{0mm}
+\setlength\parskip{2ex}

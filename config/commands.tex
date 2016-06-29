@@ -1,0 +1,105 @@
+%===============================================================================
+% Zweck: KTR-Meta-Vorlage
+%===============================================================================
+\input{\meta/config/language}
+\newif\ifgit
+\newif\ifseminar
+% Input files from meta package
+\IfFileExists{config/metainfo}{\input{config/metainfo}}{\gitfalse}
+\input{\meta/config/packages}
+
+\ifgit
+  \newcommand{\gitkeys}{\gitAbbrevHash, \gitAuthorIsoDate, \gitAuthorName }
+\fi
+
+\graphicspath{{images/}{\meta/config/images/}{\meta/images}}
+
+\makeatletter
+\renewcommand{\maketitle} {
+  \begin{titlepage}
+  \centering
+    \begin{minipage}[t]{16cm}
+      \hfill
+      \begin{minipage}{12cm}
+            \centering
+        \uni
+        \\[12pt]%
+        {\Large \chair\\[.5em]%
+        \large \chairsub}%
+      \end{minipage}
+      \hfill
+      \begin{minipage}{3cm}
+        \includegraphics[height=28mm]{\meta/config/images/logo} %height=26mm
+      \end{minipage}
+    \end{minipage}\\[70pt]%[50pt]
+    {\Large\bf \seminar}\\[36pt]
+    {\LARGE \@title}\\[80pt]
+    \ifseminar%
+    {\Large\bf \topic:}\\[36pt]
+    {\LARGE\bf \subtitle}\\
+    \fi%
+    \vfill
+    \begin{minipage}{\textwidth}
+      \center
+      \submitter:\\
+      {\Large \@author \\[18pt]}
+      \lsupervisor: \supervisor \\[12pt]
+      Bamberg, \@date\\
+      \semester
+    \end{minipage}
+  \end{titlepage}
+}
+\makeatother
+%
+
+\numberwithin{equation}{section}
+%
+%===============================================================================
+% zentrale Layout-Angaben und Befehle
+%===============================================================================
+%
+%#1 Breite
+%#2 Datei (liegt im image Verzeichnis)
+%#3 Beschriftung
+%#4 Label fuer Referenzierung
+\newcommand{\image}[4]{%
+\begin{figure}[H]%
+\centering%
+\includegraphics[width=#1]{#2}%
+\caption{#3}%
+\label{#4}%
+\end{figure}%
+}
+
+%#1 Datei (liegt im graphic Verzeichnis)
+%#2 Beschriftung
+%#3 Label fuer Referenzierung
+%#4 Skalierungsfaktor
+\newcommand{\scaletikzimage}[4]{%
+\begin{figure}[H]%
+\centering%
+\scalebox{#4}{%
+\IfFileExists{graphic/#1.tikz}{\input{graphic/#1.tikz}}{
+\IfFileExists{\meta/exampleGraphic/#1.tikz}{\input{\meta/exampleGraphic/#1.tikz}}{%
+\colorbox{red}{Put your tikz file in the \texttt{graphic} folder}%
+}}}%
+\caption{#2}%
+\label{#3}%
+\end{figure}
+}
+
+%#1 algorithm name
+%#2 algorithm label
+%#3 file name in code-folder
+\newcommand{\pseudo}[3]{%
+\small%
+\begin{algorithm}[H]%
+\caption{#1}%
+\label{#2}%
+\IfFileExists{code/#3.tex}{\input{code/#3.tex}}{%
+\IfFileExists{\meta/exampleCode/#3.tex}{\input{\meta/exampleCode/#3.tex}}{%
+\colorbox{red}{Put your code file in the \texttt{code} folder}%
+}}%
+\end{algorithm}%
+\normalsize%
+}

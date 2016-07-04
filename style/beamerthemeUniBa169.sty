@@ -266,9 +266,11 @@ anchor=south east,
   \framelatex{
   \begin{beamercolorbox}[leftskip=0.2cm, rightskip=0.2cm, wd=\paperwidth,ht=0.35\beamer@headheight,sep=0.05cm]{Location bar}
     \usebeamerfont{section in head/foot}%
-    \insertshorttitle \ | \insertshortauthor \ | \insertshortinstitute
-    \hfill
-    \insertframenumber/\inserttotalframenumber
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=south west] at ($(current page.south west)+(.1,0)$){\insertshorttitle \ | \insertshortauthor \ | \insertshortinstitute};
+      \node[anchor=south] at (current page.south){\ifgit\color{unibagrayI}{\gitMark}\fi};
+      \node[anchor=south east] at ($(current page.south east)+(-.1,0)$){\insertframenumber/\inserttotalframenumber};
+    \end{tikzpicture}
   \end{beamercolorbox}}
 }
 
@@ -291,10 +293,7 @@ anchor=south east,
   rectangle with rounded corners south east=0pt,
 ] at ($(current page.south east)+(-.1,.1)$) (b) {};
 \draw[anchor=north east] node(logo) at ($(b.north east)+(.15,.15)$) { \pgfuseimage{uniheadertitle} };
-%\draw[unibablueI] node(uniba) [below of=logo, anchor=center]{\scriptsize\unibastring};
 \end{tikzpicture}
-    %\beamer@tempdim=\beamer@sidebarwidth%
-    %\advance\beamer@tempdim by -6pt%
     \vskip12em%
     \hskip1em\insertverticalnavigation{\beamer@sidebarwidth}%
     \vfill
@@ -314,21 +313,3 @@ anchor=south east,
       \vskip2pt}
   \fi
   }
-
-
-%\setbeamertemplate{section in sidebar}%{sidebar theme}
-%{%
-%  \vbox{%
-%    \vskip1ex%
-%    \beamer@sidebarformat{3pt}{section in sidebar}{\insertsectionheadnumber
-%~\insertsectionhead}%
-%  }%
-%}
-%\setbeamertemplate{section in sidebar shaded}%{sidebar theme}
-%{%
-%  \vbox{%
-%    \vskip1ex%
-%    \beamer@sidebarformat{3pt}{section in sidebar shaded}{\insertsectionheadnumber
-%~\insertsectionhead}%
-%  }%
-%}

@@ -241,8 +241,10 @@ anchor=south west,
   \framelatex{
   \begin{beamercolorbox}[leftskip=.3cm,wd=\paperwidth,ht=0.25\beamer@headheight,sep=0.1cm]{Location bar}
     \usebeamerfont{section in head/foot}%
-    \insertshortauthor \ - \insertshortinstitute
-    \hfill
-    \insertframenumber/\inserttotalframenumber
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=south west] at ($(current page.south west)+(.1,0)$){\insertshorttitle \ | \insertshortauthor \ | \insertshortinstitute};
+      \node[anchor=south] at (current page.south){\ifgit\color{unibagrayI}{\gitMark}\fi};
+      \node[anchor=south east] at ($(current page.south east)+(-.1,0)$){\insertframenumber/\inserttotalframenumber};
+    \end{tikzpicture}
   \end{beamercolorbox}}
 }

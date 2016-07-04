@@ -268,7 +268,7 @@ anchor=south east,
     \usebeamerfont{section in head/foot}%
     \begin{tikzpicture}[remember picture, overlay]
       \node[anchor=south west] at ($(current page.south west)+(.1,0)$){\insertshorttitle \ | \insertshortauthor \ | \insertshortinstitute};
-      \node[anchor=south] at (current page.south){\ifgit\color{unibagrayI}{\gitMark}\fi};
+      \node[anchor=south] at (current page.south){\ifgit\color{unibagrayI}{\gitMarkPref \textbullet{} \gitMark}\fi};
       \node[anchor=south east] at ($(current page.south east)+(-.1,0)$){\insertframenumber/\inserttotalframenumber};
     \end{tikzpicture}
   \end{beamercolorbox}}

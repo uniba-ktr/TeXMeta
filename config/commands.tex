@@ -89,11 +89,7 @@
 \makeatother
 \fi
 
-\ifpresentation
-\renewcommand{\gitMarkFormat}{\color{unibagrayI}\tiny\sffamily}
-\else
-\renewcommand{\gitMarkFormat}{\color{unibagrayI}\small\sffamily}
-\fi
+\renewcommand{\gitMarkFormat}{\color{unibagrayI}\ifpresentation\tiny\else\small\fi\sffamily}
 
 \numberwithin{equation}{section}
 %

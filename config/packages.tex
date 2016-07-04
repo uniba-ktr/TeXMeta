@@ -1,24 +1,36 @@
-\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[iso]{umlaute}
+\usepackage{lmodern}
 \usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \ifgit
   \usepackage[mark]{gitinfo2}
 \fi
+\usepackage{etex}
+\usepackage{latexsym}
 \usepackage{ae}
 \usepackage{color}
+%% Mathe und Formeln
+\usepackage{calc}
 \usepackage{amsmath}
-\usepackage{amsfonts}
+\usepackage{amssymb,amsthm,amsfonts}
+\usepackage{dsfont}
+\usepackage[nice]{nicefrac}
+\usepackage{cancel}  %%druchstreichen von Formeln
+\usepackage{thumbpdf}
+\usepackage{wasysym}
+\usepackage{ucs}
 
 %%   Fuer anspruchsvolle Tabellen   %%
 \usepackage{longtable, colortbl}
 \usepackage{multicol, multirow}
+\usepackage{hyperref}
 
-\usepackage[pdftitle={\@title},pdfauthor={\@author},pdftex,bookmarksopen,bookmarksnumbered]{hyperref}
-\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
 \usepackage{float}
 \usepackage{tikz}
 \usepackage{pgfplots}
-\usetikzlibrary{arrows,shapes,fit,positioning,decorations,backgrounds,shadows}
+\usetikzlibrary{arrows,shapes,fit,positioning,decorations,backgrounds,shadows,calc}
 
 \pdfcompresslevel=9
 
@@ -50,6 +62,8 @@
 \usepackage[normalem]{ulem}
 \newcommand{\m}[1]{\uline{#1}}
 
+\ifpresentation
+\else
 % ausf\"{u}hrlichere Fehlermeldungen
 \errorcontextlines=999
 %
@@ -65,3 +79,4 @@
 %% Absatzeinstellungen
 \setlength\parindent{0mm}
 \setlength\parskip{2ex}
+\fi

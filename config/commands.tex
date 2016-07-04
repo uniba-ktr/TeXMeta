@@ -4,16 +4,53 @@
 \input{\meta/config/language}
 \newif\ifgit
 \newif\ifseminar
+\newif\ifpresentation
 % Input files from meta package
 \IfFileExists{config/metainfo}{\input{config/metainfo}}{\gitfalse}
 \input{\meta/config/packages}
-
+\input{\meta/config/unibaColors}
 \ifgit
   \newcommand{\gitkeys}{\gitAbbrevHash, \gitAuthorIsoDate, \gitAuthorName }
 \fi
 
+\ifpresentation
+\usetheme{UniBa169}
+%\usefonttheme{
+%	default | professionalfonts | serif |
+%	structurebold | structureitalicserif |
+%	structuresmallcapsserif
+%}
+\usefonttheme{professionalfonts}
+%\useinnertheme{
+%	circles | default | inmargin |
+%	rectangles | rounded
+%}
+\useinnertheme{rectangles}
+%\useoutertheme{
+%	default | infolines | miniframes |
+%	shadow | sidebar | smoothbars |
+%	smoothtree | split | tree
+%}
+%\useoutertheme{split}
+\setbeamercovered{transparent}
+
+% Without navigation symbols
+\beamertemplatenavigationsymbolsempty
+\fi
+
+\makeatletter
+\hypersetup{pdftitle={\@title}, pdfauthor={\@author}, linktoc=page, pdfborder={0 0 0 [3 3]}, breaklinks=true, linkbordercolor=unibablueI, menubordercolor=unibablueI, urlbordercolor=unibablueI, citebordercolor=unibablueI, filebordercolor=unibablueI}
+%% Define a new 'leo' style for the package that will use a smaller font.
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+
 \graphicspath{{images/}{\meta/config/images/}{\meta/images}}
 
+\ifpresentation
+\else
 \makeatletter
 \renewcommand{\maketitle} {
   \begin{titlepage}
@@ -50,7 +87,7 @@
   \end{titlepage}
 }
 \makeatother
-%
+\fi
 
 \numberwithin{equation}{section}
 %

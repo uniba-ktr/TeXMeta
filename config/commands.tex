@@ -5,6 +5,7 @@
 \newif\ifgit
 \newif\ifseminar
 \newif\ifpresentation
+\newif\ifthesis
 % Input files from meta package
 \IfFileExists{config/metainfo}{\input{config/metainfo}}{\gitfalse}
 \input{\meta/config/packages}
@@ -53,7 +54,35 @@
 \else
 \makeatletter
 \renewcommand{\maketitle} {
-  \begin{titlepage}
+\begin{titlepage}
+\ifthesis
+\ThisCenterWallPaper{1}{\meta/config/images/titlepage.pdf}
+
+\setstretch{1.2}
+\vspace*{55mm}
+\begin{minipage}[t]{2cm}
+\textsc{Thema:}
+\end{minipage}
+\begin{minipage}[t]{12cm}
+\textbf{\Large \@title}\\[10mm]
+\textbf{\large \@subtitle \normalsize}
+\end{minipage}\\[25mm]
+\centering
+\Huge \textbf{\degree arbeit}\\
+\vspace{1cm}
+\Large
+im Studiengang \studycourse\ der Fakultät Wirtschaftsinformatik und Angewandte Informatik der Otto-Friedrich-Universität Bamberg\\
+\normalsize
+\vfill
+\begin{flushleft}
+\begin{tabbing}
+xxxxxxxxxxxxxxx\=xxxxxxxxxxxxxx\kill
+Verfasser: \> \@author\\
+Themensteller:\> \advisor \\
+Abgabedatum:\> \@date\\
+\end{tabbing}
+\end{flushleft}
+\else
   \centering
     \begin{minipage}[t]{16cm}
       \hfill
@@ -84,12 +113,31 @@
       Bamberg, \@date\\
       \semester
     \end{minipage}
-  \end{titlepage}
+\fi
+\end{titlepage}
 }
 \makeatother
 \fi
 
 \renewcommand{\gitMarkFormat}{\color{unibagrayI}\ifpresentation\tiny\else\small\fi\sffamily}
+
+\ifthesis
+% Schönere Kapitel?
+\renewcommand*{\chapterformat}{%
+  \thechapter\enskip
+  \textcolor{gray!50}{\rule[-\dp\strutbox]{2pt}{\baselineskip}}\enskip
+}
+\renewcommand{\headfont}{\normalfont\sffamily\itshape}    % Kolumnentitel serifenlos
+\renewcommand{\pnumfont}{\normalfont\sffamily}    % Seitennummern serifenlos
+\pagestyle{scrheadings}
+%\pagestyle{scrplain}
+\ihead[]{\headmark}              % Kolumnentitel immer oben innen
+\chead[]{}                       % Mitte leer lassen
+\ohead[\pagemark]{\pagemark}     % Seitennummern immer oben aussen
+%\ohead[]{}
+\ofoot[]{}                       % Seitennummern in der Fusszeile loeschen
+\cfoot[]{\ifgit \gitMarkFormat{\gitMarkPref\,\textbullet{}\,Branch: \gitBranch\,@\,\gitAbbrevHash{} \textbullet{} Release:\gitReln{} (\gitAuthorDate)}\fi}                       % Seitennummern in der Fusszeile loeschen
+\fi
 
 \numberwithin{equation}{section}
 %
@@ -142,3 +190,29 @@
 \end{algorithm}%
 \normalsize%
 }
+
+\ifthesis
+\makeatletter
+\newcommand{\erklaerung}{
+\newpage
+\section*{Eidesstattliche Erklärung}
+\vspace{25mm}
+
+Ich erkläre hiermit gemäß § 17 Abs. 2 APO, dass ich die vorstehende \degree arbeit selbständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe.\\[20mm]
+
+\begin{minipage}{0.4\textwidth}
+\location , \@date \hfill \\
+\textcolor{white}{M}
+\end{minipage}
+\begin{minipage}{0.6\textwidth}
+\begin{flushright}
+\begin{center}
+\textcolor{white}{M}\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\\
+\@author \vfill
+\end{center}
+\end{flushright}
+\end{minipage}
+\newpage
+}
+\makeatother
+\fi

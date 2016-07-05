@@ -1,14 +1,21 @@
 \usepackage[utf8x]{inputenc}
 \usepackage[iso]{umlaute}
 \usepackage{lmodern}
-\usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \ifgit
 \ifpresentation
   \usepackage{gitinfo2}
   \else
+  \ifthesis
+  \usepackage{gitinfo2}
+  \else
   \usepackage[mark]{gitinfo2}
+  \fi
 \fi
+\fi
+\ifthesis
+  \usepackage{setspace}
+  \usepackage{wallpaper}
 \fi
 \usepackage{etex}
 \usepackage{latexsym}
@@ -16,19 +23,21 @@
 \usepackage{color}
 %% Mathe und Formeln
 \usepackage{calc}
-\usepackage{amsmath}
+\usepackage[centertags]{amsmath}
 \usepackage{amssymb,amsthm,amsfonts}
 \usepackage{dsfont}
 \usepackage[nice]{nicefrac}
 \usepackage{cancel}  %%druchstreichen von Formeln
 \usepackage{thumbpdf}
-\usepackage{wasysym}
+\usepackage{latexsym,wasysym}
 \usepackage{ucs}
 
 %%   Fuer anspruchsvolle Tabellen   %%
 \usepackage{longtable, colortbl}
 \usepackage{multicol, multirow}
 \usepackage{hyperref}
+\usepackage[numbers]{natbib}
+\usepackage{lscape}
 
 \usepackage{graphicx}
 \usepackage{float}
@@ -43,9 +52,14 @@
 \usepackage{verbatim}            % Quellcode einbinden (\verbatiminput) standardpaket
 \usepackage{moreverb}
 % PseudoCode
+\ifthesis
+\usepackage[chapter]{algorithm}
+\else
 \usepackage{algorithm}
+\fi
 \usepackage{algpseudocode}
 %\usepackage{algorithmicx}
+
 
 \floatname{algorithm}{\algo}
 \algrenewcommand{\algorithmiccomment}[1]{\hskip1em\textcolor{gray!60}{$\rhd$ #1}}
@@ -56,15 +70,37 @@
 %%   intoc zur Aufnhame des Abkuerzungs- und Symbolverzeichnisses ins Inhaltsverzeichnis
 \usepackage[intoc]{nomencl}
 \setlength{\nomlabelwidth}{.20\hsize}
-\renewcommand{\nomlabel}[1]{#1 \dotfill}
+%\renewcommand{\nomlabel}[1]{#1 \dotfill}
 \setlength{\nomitemsep}{-\parsep}
 \makenomenclature
-
 \renewcommand{\nomname}{\abbr}
+\newcommand{\nomaltname}{\losymbols}
+\newcommand{\nomaltpreamble}{}
+\newcommand{\nomaltpostamble}{}
+\newcommand{\usetwonomenclatures}{\nomenclature[\switchnomitem]{}{}}
+\newcommand{\switchnomitem}{R}
+\renewcommand{\nomgroup}[1]{%
+\ifthenelse{\equal{#1}{\switchnomitem}}{\switchnomalt}{}}
+\newcommand{\switchnomalt}{%
+\end{thenomenclature}
+\newpage
+\renewcommand{\nomname}{\nomaltname}
+\renewcommand{\nompreamble}{\nomaltpreamble}
+\renewcommand{\nompostamble}{\nomaltpostamble}
+\begin{thenomenclature}
+}
+
+%\renewcommand{\nomname}{\abbr}
 
 %%   Hervorhebung der Abkuerzungsbuchstaben   %%
 \usepackage[normalem]{ulem}
 \newcommand{\m}[1]{\uline{#1}}
+
+\ifthesis
+  %% Stichwortverzeichnis
+  \usepackage{makeidx}
+  \makeindex
+\fi
 
 \ifpresentation
 \else
@@ -83,4 +119,10 @@
 %% Absatzeinstellungen
 \setlength\parindent{0mm}
 \setlength\parskip{2ex}
+\fi
+
+\ifthesis
+\usepackage[automark]{scrpage2}            % Kopf und Fusszeilen-Layout
+\else
+\usepackage{fancyhdr}
 \fi

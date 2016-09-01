@@ -176,6 +176,34 @@ Abgabedatum:\> \@date\\
 \end{figure}
 }
 
+% You must include \usepackage[font=footnotesize]{subfig} to use this command
+% #1 relative width of both figures at most 0.5
+% #2 picture one in /taskXX/P1
+% #3 caption of figure 1
+% #4 label of figure 1
+% #5 picture two in /taskXX/P2
+% #6 caption of figure 2
+% #7 label of figure 2
+% #8 overall caption
+% #9 overall label
+\newcommand{\twofigures}[9]{%
+  \begin{figure}[H]%
+    \centerline{%
+      \subfloat[#3]{%
+        \includegraphics[width=#1\textwidth]{images/#2}%
+        \label{#4}%
+      }%
+      \hfil%
+      \subfloat[#6]{%
+        \includegraphics[width=#1\textwidth]{images/#5}%
+        \label{#7}%
+      }%
+    }%
+    \caption{#8}%
+    \label{#9}%
+  \end{figure}%
+}
+
 %#1 algorithm name
 %#2 algorithm label
 %#3 file name in code-folder

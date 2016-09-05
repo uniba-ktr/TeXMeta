@@ -11,10 +11,15 @@ uid := $(shell id -u $$USER)
 gid := $(shell id -g $$USER)
 dockerabsvol := $(shell git rev-parse --show-toplevel)
 dockerincontainer := $(shell dirname $(shell git ls-tree --full-name --name-only HEAD Makefile))
+# config
+prepared := .prepared
 
 .PHONY: all alldocker prepare init clean docker
-
+ifeq ($(wildcard $(prepared)),)
+.DEFAULT_GOAL := prepare
+else
 .DEFAULT_GOAL := $(main)
+endif
 
 # Call make init to create structure and update the meta files
 init: updateMeta $(styles) $(bibtexstyles) $(classes)

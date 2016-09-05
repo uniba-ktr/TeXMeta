@@ -17,11 +17,9 @@ dockerincontainer := $(shell dirname $(shell git ls-tree --full-name --name-only
 .DEFAULT_GOAL := $(main)
 
 # Call make init to create structure and update the meta files
-init: $(styles) $(bibtexstyles) $(classes)
-	@echo "\nCopying styles and creating initial structure"
+init: updateMeta $(styles) $(bibtexstyles) $(classes)
+	@echo "\nCopying styles and creating initial structure\n"
 	@mkdir -p graphic code images content
-	@echo "Updating meta repository\n"
-	@cd $(meta) && git pull origin master
 
 # Call make on LaTeX's main file
 $(main): $(main).tex
@@ -57,6 +55,10 @@ prepare: $(hooks)
 	@test -f .prepared || git commit -m $(gitprepare)
 	@test -f .prepared || touch .prepared
 	@make all
+
+updateMeta:
+	@echo "\nUpdating meta repository\n"
+	@cd $(meta) && git pull origin master
 
 $(styles): %.sty : $(meta)/style/%.sty
 	@cp $^ $@

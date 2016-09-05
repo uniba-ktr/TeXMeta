@@ -23,7 +23,7 @@ init: $(styles) $(bibtexstyles) $(classes)
 	@echo "Updating meta repository\n"
 	@cd $(meta) && git pull origin master
 
-# Call make [seminar]
+# Call make on LaTeX's main file
 $(main): $(main).tex
 	@echo "\nCompiling $(main)\n"
 	@latexmk -pdf -pdflatex="pdflatex -shell-escape -synctex=1 -interaction=nonstopmode" -use-make $<

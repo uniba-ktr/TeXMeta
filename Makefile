@@ -6,8 +6,6 @@ gitprepare := "Initialized Git Foo $(main)"
 # Git hooks
 gitinfohook := $(meta)/style/gitinfo2-hook.txt
 githooks := $(base)/.git/hooks
-# TeXMeta location
-metaurl := "https://github.com/uniba-ktr/TeXMeta.git"
 # Docker adjustments
 uid = $(shell id -u $$USER)
 gid = $(shell id -g $$USER)

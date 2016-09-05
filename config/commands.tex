@@ -5,7 +5,9 @@
 \newif\ifgit
 \newif\ifseminar
 \newif\ifpresentation
+\newif\ifposter
 \newif\ifthesis
+\newif\iftodo
 % Input files from meta package
 \IfFileExists{config/metainfo}{\input{config/metainfo}}{\gitfalse}
 \input{\meta/config/packages}
@@ -40,13 +42,17 @@
 \fi
 
 \makeatletter
+\ifposter
+\else
 \hypersetup{pdftitle={\@title}, pdfauthor={\@author}, linktoc=page, pdfborder={0 0 0 [3 3]}, breaklinks=true, linkbordercolor=unibablueI, menubordercolor=unibablueI, urlbordercolor=unibablueI, citebordercolor=unibablueI, filebordercolor=unibablueI}
+\fi
 %% Define a new 'leo' style for the package that will use a smaller font.
 \def\url@leostyle{%
   \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
 \makeatother
 %% Now actually use the newly defined style.
 \urlstyle{leo}
+
 
 \graphicspath{{images/}{\meta/config/images/}{\meta/images}}
 \pgfplotsset{compat=1.9}
@@ -219,6 +225,8 @@ Abgabedatum:\> \@date\\
 \end{algorithm}%
 \normalsize%
 }
+
+
 
 \ifthesis
 \makeatletter

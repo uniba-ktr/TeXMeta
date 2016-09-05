@@ -35,10 +35,18 @@
 %%   Fuer anspruchsvolle Tabellen   %%
 \usepackage{longtable, colortbl}
 \usepackage{multicol, multirow}
+\ifposter
+\usepackage{url}
+\else
 \usepackage{hyperref}
+\fi
 \usepackage[numbers]{natbib}
 \usepackage{lscape}
-
+\iftodo
+\usepackage{todonotes}
+\else
+\usepackage[disable]{todonotes}
+\fi
 %% Graphic
 \usepackage[font=footnotesize]{subfig}
 \usepackage{graphicx}
@@ -61,7 +69,10 @@
 \fi
 \usepackage{algpseudocode}
 %\usepackage{algorithmicx}
-
+\ifposter
+%\usepackage[vlined]{algorithm2e}
+\usepackage{times, relsize, booktabs, caption, helvet, paralist}
+\fi
 
 \floatname{algorithm}{\algo}
 \algrenewcommand{\algorithmiccomment}[1]{\hskip1em\textcolor{gray!60}{$\rhd$ #1}}
@@ -70,6 +81,8 @@
 
 
 %%   intoc zur Aufnhame des Abkuerzungs- und Symbolverzeichnisses ins Inhaltsverzeichnis
+\ifposter
+\else
 \usepackage[intoc]{nomencl}
 \setlength{\nomlabelwidth}{.20\hsize}
 %\renewcommand{\nomlabel}[1]{#1 \dotfill}
@@ -97,7 +110,7 @@
 %%   Hervorhebung der Abkuerzungsbuchstaben   %%
 \usepackage[normalem]{ulem}
 \newcommand{\m}[1]{\uline{#1}}
-
+\fi
 \ifthesis
   %% Stichwortverzeichnis
   \usepackage{makeidx}
@@ -105,6 +118,8 @@
 \fi
 
 \ifpresentation
+\else
+\ifposter
 \else
 % ausf\"{u}hrlichere Fehlermeldungen
 \errorcontextlines=999
@@ -121,6 +136,7 @@
 %% Absatzeinstellungen
 \setlength\parindent{0mm}
 \setlength\parskip{2ex}
+\fi
 \fi
 
 \ifthesis

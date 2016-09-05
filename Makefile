@@ -16,16 +16,6 @@ dockerincontainer = $(shell dirname $(shell git ls-tree --full-name --name-only 
 
 .DEFAULT_GOAL := $(main)
 
-# Call make prepare only once after checkout
-prepare: $(hooks)
-	@echo "\nInitializing git, modules and hooks"
-	@test -f .prepared || sed -i 's#\\newcommand\\meta.*#\\newcommand\\meta{${meta}}#g' $(main).tex
-	@test -f .prepared || ln -fs $(base)/.git/gitHeadInfo.gin gitHeadLocal.gin
-	@echo "Performing first commit for $(main)\n"
-	@test -f .prepared || git add .
-	@test -f .prepared || git commit -m $(gitprepare)
-	@test -f .prepared || touch .prepared
-
 # Call make init to create structure and update the meta files
 init: $(styles) $(bibtexstyles) $(classes)
 	@echo "\nCopying styles and creating initial structure"
@@ -57,6 +47,17 @@ alldocker: init docker
 	@echo "\nEverything is done and cleaned\n"
 
 # Internal Targets
+# Call make prepare only once after checkout
+prepare: $(hooks)
+	@echo "\nInitializing git, modules and hooks"
+	@test -f .prepared || sed -i 's#\\newcommand\\meta.*#\\newcommand\\meta{${meta}}#g' $(main).tex
+	@test -f .prepared || ln -fs $(base)/.git/gitHeadInfo.gin gitHeadLocal.gin
+	@echo "Performing first commit for $(main)\n"
+	@test -f .prepared || git add .
+	@test -f .prepared || git commit -m $(gitprepare)
+	@test -f .prepared || touch .prepared
+	@make all
+	
 $(styles): %.sty : $(meta)/style/%.sty
 	@cp $^ $@
 

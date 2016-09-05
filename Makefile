@@ -53,15 +53,16 @@ alldocker: init docker
 # Call make prepare only once after checkout
 prepare: $(hooks)
 	@echo "\nInitializing git, modules and hooks"
-	@test -f .prepared || sed -i 's#\\newcommand\\meta.*#\\newcommand\\meta{${meta}}#g' $(main).tex
-	@test -f .prepared || ln -fs $(base)/.git/gitHeadInfo.gin gitHeadLocal.gin
+	@test -f $(prepared) || sed -i 's#\\newcommand\\meta.*#\\newcommand\\meta{${meta}}#g' $(main).tex
+	@test -f $(prepared) || ln -fs $(base)/.git/gitHeadInfo.gin gitHeadLocal.gin
 	@echo "Performing first commit for $(main)\n"
-	@test -f .prepared || git add .
-	@test -f .prepared || git commit -m $(gitprepare)
-	@test -f .prepared || touch .prepared
+	@test -f $(prepared) || git add .
+	@test -f $(prepared) || git commit -m $(gitprepare)
+	@test -f $(prepared) || touch .prepared
 	@make all
 
 updateMeta:
+	@test -f $(prepared) || make gitmodules
 	@echo "\nUpdating meta repository\n"
 	@cd $(meta) && git pull origin master
 

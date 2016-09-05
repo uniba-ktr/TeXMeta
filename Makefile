@@ -7,10 +7,10 @@ gitprepare := "Initialized Git Foo $(main)"
 gitinfohook := $(meta)/style/gitinfo2-hook.txt
 githooks := $(base)/.git/hooks
 # Docker adjustments
-uid = $(shell id -u $$USER)
-gid = $(shell id -g $$USER)
-dockerabsvol = $(shell git rev-parse --show-toplevel)
-dockerincontainer = $(shell dirname $(shell git ls-tree --full-name --name-only HEAD Makefile))
+uid := $(shell id -u $$USER)
+gid := $(shell id -g $$USER)
+dockerabsvol := $(shell git rev-parse --show-toplevel)
+dockerincontainer := $(shell dirname $(shell git ls-tree --full-name --name-only HEAD Makefile))
 
 .PHONY: all alldocker prepare init clean docker
 

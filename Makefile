@@ -16,7 +16,7 @@ prepared := .prepared
 
 .PHONY: all alldocker prepare init clean docker
 ifeq ($(wildcard $(prepared)),)
-.DEFAULT_GOAL := prepare
+.DEFAULT_GOAL := gitmodules
 else
 .DEFAULT_GOAL := $(main)
 endif

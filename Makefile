@@ -33,7 +33,7 @@ $(main): $(main).tex
 clean:
 	@echo "\nCleaning up latex crap\n"
 	@latexmk -c
-	@rm -f *.synctex.gz *.bbl *.nlo *.nls *.nav *.snm
+	@rm -f *.synctex.gz *.bbl *.nlo *.nls *.nav *.snm *.loa
 
 # Call make docker
 docker:
@@ -57,7 +57,7 @@ prepare: $(hooks)
 	@test -f .prepared || git commit -m $(gitprepare)
 	@test -f .prepared || touch .prepared
 	@make all
-	
+
 $(styles): %.sty : $(meta)/style/%.sty
 	@cp $^ $@
 

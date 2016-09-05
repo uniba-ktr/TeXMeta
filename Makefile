@@ -58,7 +58,7 @@ prepare: $(hooks)
 	@echo "Performing first commit for $(main)\n"
 	@test -f $(prepared) || git add .
 	@test -f $(prepared) || git commit -m $(gitprepare)
-	@test -f $(prepared) || touch .prepared
+	@test -f $(prepared) || touch $(prepared)
 	@make all
 
 updateMeta:

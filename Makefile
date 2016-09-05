@@ -19,7 +19,7 @@ dockerincontainer = $(shell dirname $(shell git ls-tree --full-name --name-only 
 .DEFAULT_GOAL := $(main)
 
 # Call make prepare only once after checkout
-prepare: initializegit gitmodules $(hooks)
+prepare: $(hooks)
 	@echo "\nInitializing git, modules and hooks"
 	@test -f .prepared || sed -i 's#\\newcommand\\meta.*#\\newcommand\\meta{${meta}}#g' $(main).tex
 	@test -f .prepared || ln -fs $(base)/.git/gitHeadInfo.gin gitHeadLocal.gin
@@ -59,16 +59,6 @@ alldocker: init docker
 	@echo "\nEverything is done and cleaned\n"
 
 # Internal Targets
-
-initializegit:
-	@test -f .prepared || rm -rf .git .gitmodules meta
-	@test -f .prepared || ( cd $(base) && ( test -d .git || git init ) )
-
-gitmodules:
-	@test -d $(meta) || git submodule add $(metaurl) $(meta)
-	@git submodule update --init $(meta)
-	@( git add $(meta) && git commit -m "Update meta" ) || true
-
 $(styles): %.sty : $(meta)/style/%.sty
 	@cp $^ $@
 

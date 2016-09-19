@@ -126,7 +126,9 @@ Abgabedatum:\> \@date\\
 \makeatother
 \fi
 
-\renewcommand{\gitMarkFormat}{\color{unibagrayI}\ifpresentation\tiny\else\small\fi\sffamily}
+\ifgit
+  \renewcommand{\gitMarkFormat}{\color{unibagrayI}\ifpresentation\tiny\else\small\fi\sffamily}
+\fi
 
 \ifthesis
 % Schönere Kapitel?

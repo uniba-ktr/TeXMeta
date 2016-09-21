@@ -11,6 +11,7 @@ uid := $(shell id -u $$USER)
 gid := $(shell id -g $$USER)
 dockerabsvol := $(shell git rev-parse --show-toplevel)
 dockerincontainer := $(shell dirname $(shell git ls-tree --full-name --name-only HEAD Makefile))
+dockerimage := "unibaktr/latex:jessie"
 # config
 prepared := .prepared
 
@@ -41,7 +42,7 @@ clean:
 # Call make docker
 docker:
 	@echo "\nDockerizing the build process\n"
-	@docker run -it --rm -v $(dockerabsvol)/:/src/ -w /src unibaktr/dock-tex:jessie /bin/sh -c "cd $(dockerincontainer) && make && make clean && chown $(uid):$(gid) $(main).pdf"
+	@docker run -it --rm -v $(dockerabsvol)/:/src/ -w /src $(dockerimage) /bin/sh -c "cd $(dockerincontainer) && make && make clean && chown $(uid):$(gid) $(main).pdf"
 
 all: init $(main) clean
 	@echo "\nEverything is done and cleaned\n"

@@ -228,7 +228,13 @@ Abgabedatum:\> \@date\\
 \normalsize%
 }
 
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
 
+\ifpresentation
+\resetcounteronoverlays{saveenumi}
+\fi
 
 \ifthesis
 \makeatletter

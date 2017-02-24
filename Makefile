@@ -11,7 +11,7 @@ uid := $(shell id -u $$USER)
 gid := $(shell id -g $$USER)
 dockerabsvol := $(shell git rev-parse --show-toplevel)
 dockerincontainer := $(shell dirname $(shell git ls-tree --full-name --name-only HEAD Makefile))
-dockerimage := "unibaktr/latex:jessie"
+dockerimage := "whatever4711/latex"
 # config
 prepared := .prepared
 
@@ -30,7 +30,7 @@ init: updateMeta $(styles) $(bibtexstyles) $(classes)
 # Call make on LaTeX's main file
 $(main): $(main).tex
 	@echo "\nCompiling $(main)\n"
-	@latexmk -pdf -pdflatex="pdflatex -shell-escape -synctex=1 -interaction=nonstopmode" -use-make $<
+	@latexmk -pdf -use-make $<
 	@latexmk -c
 
 # Call make clean
@@ -42,7 +42,7 @@ clean:
 # Call make docker
 docker:
 	@echo "\nDockerizing the build process\n"
-	@docker run -it --rm -v $(dockerabsvol)/:/src/ -w /src $(dockerimage) /bin/sh -c "cd $(dockerincontainer) && make && make clean && chown $(uid):$(gid) $(main).pdf"
+	@docker run -it --rm -v $(dockerabsvol)/:/src/ -w /src $(dockerimage) /bin/sh -c "apk add --update make git && cd $(dockerincontainer) && make && make clean && chown $(uid):$(gid) $(main).pdf"
 
 all: init $(main) clean
 	@echo "\nEverything is done and cleaned\n"

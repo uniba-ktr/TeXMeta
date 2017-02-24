@@ -14,12 +14,20 @@ dockerincontainer := $(shell dirname $(shell git ls-tree --full-name --name-only
 dockerimage := "whatever4711/latex"
 # config
 prepared := .prepared
+latexmk_version := $(shell latexmk --version 2> /dev/null)
+ifdef latexmk_version
+initial := all
+goal := $(main)
+else
+initial := alldocker
+goal := docker
+endif
 
 .PHONY: all alldocker prepare init clean docker
 ifeq ($(wildcard $(prepared)),)
 .DEFAULT_GOAL := gitmodules
 else
-.DEFAULT_GOAL := $(main)
+.DEFAULT_GOAL := $(goal)
 endif
 
 # Call make init to create structure and update the meta files
@@ -60,7 +68,7 @@ prepare: $(hooks)
 	@test -f $(prepared) || git add .
 	@test -f $(prepared) || git commit -m $(gitprepare)
 	@test -f $(prepared) || touch $(prepared)
-	@make all
+	@make $(initial)
 
 updateMeta:
 	@test -f $(prepared) || make gitmodules

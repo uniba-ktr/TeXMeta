@@ -167,6 +167,18 @@ Abgabedatum:\> \@date\\
 \end{figure}%
 }
 
+%#1 Breite
+%#2 Datei (liegt im image Verzeichnis)
+%#3 Beschriftung
+%#4 Label fuer Referenzierung
+\newcommand{\pic}[2]{
+\begin{figure}[H]
+\centering
+\includegraphics[width=#1]{#2}
+\end{figure}
+}
+
+
 %#1 Datei (liegt im graphic Verzeichnis)
 %#2 Beschriftung
 %#3 Label fuer Referenzierung
@@ -265,6 +277,7 @@ Ich erkläre hiermit gemäß § 17 Abs. 2 APO, dass ich die vorstehende \degree 
 %===============================================================================
 % Listing Styles
 %===============================================================================
+\lstset{basicstyle=\ttfamily,showstringspaces=false,commentstyle=\color{unibagrayI},keywordstyle=\color{unibablueI},breaklines=true}
 \DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{9} % for bold
 \DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{9}  % for normal
 \lstset{
@@ -371,3 +384,70 @@ major step/.initial=1,
 major line width/.initial=1pt,
 }
 \makeatother
+
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  keywordstyle=\color{unibablueI},
+  ndkeywordstyle=\color{unibagreenI},
+  identifierstyle=\color{black},
+  commentstyle=\color{unibagrayI}\ttfamily,
+  stringstyle=\color{unibaredI}\ttfamily,
+  sensitive=true
+}
+
+
+%% Fancy Quotes
+\makeatletter
+\tikzset{%
+  fancy quotes/.style={
+    text width=\fq@width pt,
+    align=justify,
+    inner sep=1em,
+    anchor=north west,
+    minimum width=\textwidth,
+  },
+  fancy quotes width/.initial={.8\textwidth},
+  fancy quotes marks/.style={
+    scale=8,
+    text=white,
+    inner sep=0pt,
+  },
+  fancy quotes opening/.style={
+    fancy quotes marks,
+  },
+  fancy quotes closing/.style={
+    fancy quotes marks,
+  },
+  fancy quotes background/.style={
+    show background rectangle,
+    inner frame xsep=0pt,
+    background rectangle/.style={
+      fill=unibagrayIV,
+      rounded corners,
+    },
+  }
+}
+
+\newenvironment{fancyquotes}[1][]{%
+\noindent
+\tikzpicture[fancy quotes background]
+\node[fancy quotes opening,anchor=north west] (fq@ul) at (0,0) {``};
+\tikz@scan@one@point\pgfutil@firstofone(fq@ul.east)
+\pgfmathsetmacro{\fq@width}{\textwidth - 2*\pgf@x}
+\node[fancy quotes,#1] (fq@txt) at (fq@ul.north west) \bgroup}
+{\egroup;
+\node[overlay,fancy quotes closing,anchor=east] at (fq@txt.south east) {''};
+\endtikzpicture}
+
+\makeatother
+
+\ifpresentation
+\changemenucolor{gray}{bg}{named}{unibablueV}
+\changemenucolor{gray}{br}{named}{unibablueI}
+\changemenucolor{gray}{txt}{named}{unibablueI}
+\fi

@@ -2,6 +2,7 @@ adjustbox
 algorithmicx
 algorithms
 appendix
+beamer
 cancel
 caption
 catoptions
@@ -25,12 +26,14 @@ nomencl
 pgf
 pgfplots
 polynom
+ragged2e
 relsize
 setspace
 subfig
 symbol
 times
 todonotes
+translator
 txfonts
 ucs
 ulem
@@ -44,4 +47,3 @@ xkeyval
 xpatch
 xstring
 zapfding
-ragged2e

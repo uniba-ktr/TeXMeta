@@ -248,24 +248,24 @@ Abgabedatum:\> \@date\\
 \resetcounteronoverlays{saveenumi}
 \fi
 
-\ifthesis
+%\ifthesis
 \makeatletter
 \newcommand{\erklaerung}{
 \newpage
 %-----------------------------------------------------------------------
 \section*{Erklärung zur Beachtung der Vorschriften der Allgemeinen Prüfungsordnung (APO) WIAI}
 %-----------------------------------------------------------------------
-Ich erkläre hiermit gemäß  APO \S  9, Absatz 12, dass ich die vorstehende \degree arbeit selbständig verfasst habe und ich keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe.
+Ich erkläre hiermit gemäß  APO \S  9, Absatz 12, dass ich die vorstehende \ifthesis\degree arbeit\fi selbständig verfasst habe und ich keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe.
 \\
-Des Weiteren erkläre ich, dass die digitale Fassung der gedruckten Ausfertigung der \degree arbeit ausnahmslos in Inhalt und Wortlaut entspricht und zur Kenntnis genommen wurde, dass diese digitale Fassung einer durch Software unterstützten, anonymisierten Prüfung auf Plagiate unterzogen werden kann.
+Des Weiteren erkläre ich, dass die digitale Fassung der gedruckten Ausfertigung der \ifthesis\degree arbeit\fi ausnahmslos in Inhalt und Wortlaut entspricht und zur Kenntnis genommen wurde, dass diese digitale Fassung einer durch Software unterstützten, anonymisierten Prüfung auf Plagiate unterzogen werden kann.
 %-----------------------------------------------------------------------
 \\
 %-----------------------------------------------------------------------
 \section*{Declaration on the Compliance With Regulations of ``Allgemeine Prüfungsordnung'' (APO) WIAI}
 %-----------------------------------------------------------------------
-I hereby declare in accordance with  APO \S  9, subsection 12, that I have written the preceding \degree's thesis independently and that I have not used any other sources or aids than those indicated above.
+I hereby declare in accordance with  APO \S  9, subsection 12, that I have written the preceding \ifthesis\degree's thesis\fi independently and that I have not used any other sources or aids than those indicated above.
 \\
-Furthermore, I declare that the digital version of the printed copy of the \degree's thesis  corresponds without any exception to the content and wording of the printed version of the \degree's thesis. Furthermore, I declare  that I have taken note of the regulation that this digital version of the \degree's thesis  can be the subject of an anonymous plagiarism checking supported by software.
+Furthermore, I declare that the digital version of the printed copy of the \ifthesis\degree's thesis\fi  corresponds without any exception to the content and wording of the printed version of the \ifthesis\degree's thesis\fi. Furthermore, I declare  that I have taken note of the regulation that this digital version of the \ifthesis\degree's thesis\fi  can be the subject of an anonymous plagiarism checking supported by software.
 \\[2cm]
 %-----------------------------------------------------------------------
 
@@ -283,7 +283,7 @@ Furthermore, I declare that the digital version of the printed copy of the \degr
 \newpage
 }
 \makeatother
-\fi
+%\fi
 
 %===============================================================================
 % Listing Styles

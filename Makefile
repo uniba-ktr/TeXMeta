@@ -31,7 +31,7 @@ else
 endif
 
 # Call make init to create structure and update the meta files
-init: updateMeta $(styles) $(bibtexstyles) $(classes)
+init: updateMeta packages.txt $(styles) $(bibtexstyles) $(classes)
 	@echo "\nCopying styles and creating initial structure\n"
 	@mkdir -p graphic code images content
 
@@ -87,3 +87,6 @@ $(classes): %.cls : $(meta)/style/%.cls
 $(hooks):
 	@cp $(gitinfohook) $(githooks)/$@
 	@chmod u+x $(githooks)/$@
+
+packages.txt: %.txt : $(meta)/config/tlmgr/%.txt
+	@cp $^ $@

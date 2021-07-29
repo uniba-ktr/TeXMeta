@@ -3,6 +3,7 @@ algorithmicx
 algorithms
 appendix
 beamer
+booktabs
 cancel
 caption
 catoptions
@@ -23,6 +24,7 @@ menukeys
 moreverb
 multirow
 nomencl
+paralist
 pgf
 pgfplots
 polynom

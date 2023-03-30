@@ -1,0 +1,7 @@
+\begin{tikzpicture}[node distance=2cm]
+  \node[client,label=above:\nodelabel{h1}](h1){};
+  \node[router,label=below:\nodelabel{S1},right=of h1](s1){};
+  \node[client,label=above:\nodelabel{h2}, right=of s1](h2){};
+
+  \draw[black,line width=1pt] (h1) -- (s1) --(h2);
+\end{tikzpicture}

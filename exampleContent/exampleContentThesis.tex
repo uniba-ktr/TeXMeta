@@ -3,10 +3,20 @@ Einleitung nach \autoref{cha:ein}
 
 \chapter{Hauptteil}\label{cha:haupt}
 \section{Bilder und Grafiken}\label{sec:grafiken}
+
 \subsection{Bilder}\label{subsec:bilder}
 Bilder befinden sich im Image-Ordner und lassen sich mit \textbackslash image\{Breite\}\{Datei im Image-Verzeichnis\}\{Beschriftung\}\{Label\} einbinden. \image{3cm}{logo.png}{Uni-Logo}{img:uni} Die Referenzierung erfolg mittels \textbackslash autoref\{Label\}, also z.B. \autoref{img:uni}.
 \subsection{Grafiken mit TikZ}
 Grafiken im TikZ-Framework\footnote{\url{http://www.tn-home.de/TUGDD/Stuff/TikZ_final.pdf}} lassen sich mit dem Befehl \textbackslash scaletikzimage\{Datei im Image Verzeichnis\}\{Beschriftung\}\{Label\}\{Skalierungsfaktor\} einbinden. \scaletikzimage{tikz}{TikZ-Grafik}{img:tikz}{0.9}
+
+\subsubsection{Grafiken mit Moeptikz}
+Grafiken mit Netzwerksymbolen können einfach mit moeptikz\footnote{\url{https://github.com/moepinet/moeptikz}} erstellt werden:
+\scaletikzimage{network}{Example Network}{img:topo}{0.9}
+
+\subsubsection{Grafiken mit Tikz-UML}
+UML basierte Grafiken können einfach mit tikz-uml\footnote{\url{https://perso.ensta-paris.fr/~kielbasi/tikzuml/index.php}} erstellt werden:
+\scaletikzimage{sequence}{Example Sequence}{img:seq}{0.9}
+
 \section{Tabellen}
 Tabellen lassen sich mit dem Environment\\
 \textbackslash begin\{longtable\}[H h t b c]\{Spaltendefinitionen\} ...\\
@@ -21,9 +31,18 @@ A&B&C\\
 \caption{Tabelle 1}
 \label{tab:tab1}
 \end{longtable}
+
 \section{Code-Ausschnitte}
+
+\subsection{Pseudo-Code}
 Pseudo-Code Ausschnitte lassen sich mit \textbackslash pseudo\{Name des Algorithmus\}\{Label\}\{Datei im Code-Verzeichnis\} einbinden.
 \pseudo{Mittelwert}{lst:mean}{code}
+
+\subsection{Programmiersprachen}
+\begin{verbatim}
+print("Hallo Welt")
+\end{verbatim}
+
 \section{Zitate}
 Mit \textbackslash nocite*\{\} lassen sich alle Einträge in der Bibliography ausgeben. Mit \textbackslash cite[S. xx]\{Key\} lassen sich Zitate einfügen. Z.B. \cite[S. 234]{Kurose12} \nocite*{}
 \section{Abkürzungen und Symbole}

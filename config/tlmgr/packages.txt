@@ -27,6 +27,7 @@ multirow
 nomencl
 paralist
 pgf
+pgf-umlsd
 pgfplots
 polynom
 ragged2e

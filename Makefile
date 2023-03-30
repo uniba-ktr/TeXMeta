@@ -50,7 +50,7 @@ clean:
 # Call make docker
 docker:
 	@echo "\nDockerizing the build process\n"
-	@docker run -it --rm -v $(dockerabsvol)/:/src/ -w /src $(dockerimage) /bin/sh -c "apk add --update make git && cd $(dockerincontainer) && tlmgrinstall && make && make clean && chown $(uid):$(gid) $(main).pdf"
+	@docker run --rm -v $(dockerabsvol)/:/src/ -w /src $(dockerimage) /bin/sh -c "apk add --update make git && cd $(dockerincontainer) && tlmgrinstall && make && make clean && chown $(uid):$(gid) $(main).pdf"
 
 all: init $(main) clean
 	@echo "\nEverything is done and cleaned\n"

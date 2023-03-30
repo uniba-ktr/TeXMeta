@@ -73,7 +73,7 @@ prepare: $(hooks)
 updateMeta:
 	@test -f $(prepared) || make gitmodules
 	@echo "\nUpdating meta repository\n"
-	@cd $(meta) && git pull origin master
+	@cd $(meta) && git pull origin main
 
 $(styles): %.sty : $(meta)/style/%.sty
 	@cp $^ $@

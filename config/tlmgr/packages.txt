@@ -28,6 +28,7 @@ nomencl
 paralist
 pgf
 pgf-umlsd
+pgfopts
 pgfplots
 polynom
 ragged2e

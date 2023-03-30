@@ -1,5 +1,5 @@
 # Copyright 2016, Marcel Großmann <marcel.grossmann@uni-bamberg.de>
-styles := $(styles) gitinfo2.sty gitexinfo.sty
+styles := $(styles) gitinfo2.sty gitexinfo.sty moeptikz.sty tikz-uml.sty
 hooks := post-checkout post-commit post-merge
 # Git Prepare message
 gitprepare := "Initialized Git Foo $(main)"

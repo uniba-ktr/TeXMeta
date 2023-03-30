@@ -18,6 +18,7 @@ koma-script
 l3kernel
 l3packages
 listings
+makeshape
 marvosym
 mathtools
 menukeys

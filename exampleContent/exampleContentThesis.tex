@@ -1,3 +1,12 @@
+\newacronym{ieee}{IEEE}{Institute of Electrical and Electronics Engineers}
+
+\newglossaryentry{latex}
+{
+        name=latex,
+        description={Is a mark up language specially suited for
+scientific documents}
+}
+
 \chapter{Einleitung}\label{cha:ein}
 Einleitung nach \autoref{cha:ein}
 
@@ -48,11 +57,19 @@ def my_function():
 
 \section{Zitate}
 Mit \textbackslash nocite*\{\} lassen sich alle Einträge in der Bibliography ausgeben. Mit \textbackslash cite[S. xx]\{Key\} lassen sich Zitate einfügen. Z.B. \cite[S. 234]{Kurose12} \nocite*{}
-\section{Abkürzungen und Symbole}
+\section{Abkürzungen und Glossar}
 \subsection{Abkürzungen}
-Abkürzungen können mit \textbackslash nomenclature\{Abk\}\{\textbackslash m\{Abk\}ürzung\} \nomenclature{Abk}{\m{Abk}ürzung} angegeben werden. Diese werden alphabetisch sortiert in ein Abkürzungsverzeichnis aufgenommen.
-\subsection{Symbole}
-Symbole können mit \textbackslash nomenclature[s]\{$E=mc^2$\}\{Energie\}
-\nomenclature[s]{$E=mc^2$}{Energie} in das Symbolverzeichnis aufgenommen werden.
+Abkürzungen können mit \textbackslash newacronym\{ieee\}\{IEEE\}\{Institute of Electrical and Electronics Engineers\} angegeben werden. Diese werden alphabetisch sortiert in ein Abkürzungsverzeichnis aufgenommen und im Text z.b. mit \textbackslash gls\{ieee\} referenziert, dies führt bei Verwendung zu \gls{ieee}.
+\subsection{Glossar}
+Glossareinträge können, wie in \autoref{lst:tex} gezeigt, angelegt werden. Diese können im Text ebenfalls mit \textbackslash gls\{latex\} referenziert werden, z.B. \gls{latex}.
+\begin{lstlisting}[caption=Glossareinträge, label=lst:tex, language=TeX]
+ \newglossaryentry{latex}
+{
+        name=latex,
+        description={Is a mark up language specially suited for
+scientific documents}
+}
+\end{lstlisting}
+
 \section{Stichwortverzeichnis}
 Stichwörter\index{Stichwort} können mit \textbackslash index\{Stichwort\} angelegt werden. Weitere Schlagwörter\index{Stichwort!Schlagwort} hängt man mit \textbackslash index\{Stichwort!Schlagwort\} an \footnote{\url{http://www2.informatik.hu-berlin.de/~piefel/LaTeX-PS/V03-index.pdf}}.

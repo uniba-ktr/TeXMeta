@@ -13,6 +13,9 @@ eso-pic
 etoolbox
 everysel
 float
+glossaries
+glossaries-extra
+mfirstuc
 fourier
 koma-script
 l3kernel

@@ -45,12 +45,12 @@ $(main): $(main).tex
 clean:
 	@echo "\nCleaning up latex crap\n"
 	@latexmk -c
-	@rm -f *.synctex.gz *.bbl *.nlo *.nls *.nav *.snm *.loa
+	@rm -f *.synctex.gz *.bbl *.nlo *.nls *.nav *.snm *.loa *.acn *.acr	*.alg	*.glg	*.glo	*.gls	*.ist *.glsdefs
 
 # Call make docker
 docker:
 	@echo "\nDockerizing the build process\n"
-	@docker run --rm -v $(dockerabsvol)/:/src/ -w /src $(dockerimage) /bin/sh -c "apk add --update make git && cd $(dockerincontainer) && tlmgrinstall && make && make clean && chown $(uid):$(gid) $(main).pdf"
+	@docker run --rm -v $(dockerabsvol)/:/src/ -w /src $(dockerimage) /bin/sh -c "apk add --update make git && cd $(dockerincontainer) && make && make clean && chown $(uid):$(gid) $(main).pdf"
 
 all: init $(main) clean
 	@echo "\nEverything is done and cleaned\n"

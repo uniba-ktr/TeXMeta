@@ -39,9 +39,12 @@ Pseudo-Code Ausschnitte lassen sich mit \textbackslash pseudo\{Name des Algorith
 \pseudo{Mittelwert}{lst:mean}{code}
 
 \subsection{Programmiersprachen}
-\begin{verbatim}
-print("Hallo Welt")
-\end{verbatim}
+Code Ausschnitte lassen sich einfach mit listings verwenden z.B. in der Umgebung \textbackslash begin\{lstlisting\} ... \textbackslash end\{lstlisting\}, wie in \autoref{lst:python} gezeigt.
+
+\begin{lstlisting}[language=Python, caption={Simple Python program}, label=lst:python]
+def my_function():
+  print("Hello from a function")
+\end{lstlisting}
 
 \section{Zitate}
 Mit \textbackslash nocite*\{\} lassen sich alle Einträge in der Bibliography ausgeben. Mit \textbackslash cite[S. xx]\{Key\} lassen sich Zitate einfügen. Z.B. \cite[S. 234]{Kurose12} \nocite*{}

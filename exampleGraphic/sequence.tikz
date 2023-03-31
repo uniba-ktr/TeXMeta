@@ -1,12 +1,10 @@
 \begin{tikzpicture}
-\begin{umlseqdiag}
+  \begin{umlseqdiag}
 		\umlobject [no ddots, fill=unibagrayIV]{LifelineA}
     \umlobject [no ddots, fill=unibagrayIV]{LifelineB}
-
     \begin{umlcall}[dt=6, op=func(), return=val]{LifelineA}{LifelineB}
     \begin{umlcallself}[op=func()]{LifelineA}
     \end{umlcallself}
     \end{umlcall}
-
 	\end{umlseqdiag}
-  \end{tikzpicture}
+\end{tikzpicture}

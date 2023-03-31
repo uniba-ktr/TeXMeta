@@ -16,6 +16,7 @@
 \RequirePackage{xstring}%
 \RequirePackage{calc}%
 \RequirePackage{pgfopts}%
+\RequirePackage{etoolbox}%
 \usetikzlibrary{backgrounds,arrows,shapes,fit,shadows,decorations.markings}%
 %
 \def\tikzumlPackageLayersNum{3}%
@@ -4248,13 +4249,13 @@
   \ifnum\tikzumlCall@lastchildNum=\thetikzumlCallNum%
     %
     % this test occurs a bug with latex package preview
-    \ifthenelse{\equal{\tikzumlCallStartNodeName}{\tikzumlCallEndNodeName}}{%
+    \ifstrequal{\tikzumlCallStartNodeName}{\tikzumlCallEndNodeName}{%
       \draw (\tikzumlCallBottomSrc)+(0,-\tikzumlCallPadding ex) node[coordinate, name=tikzumlTmpNode] {};%
       \node[tikzuml activity style] (eb-\tikzumlCall@nodeName) at (\tikzumlCallEndNodeName |- tikzumlTmpNode) {};%
       \draw (eb-\tikzumlCall@nodeName)+(0,-0.75*\tikzumlCallPadding ex) node[coordinate, name=tikzumlTmpNode] {};%
       \node[tikzuml activity style] (sb-\tikzumlCall@nodeName) at (\tikzumlCallStartNodeName |- tikzumlTmpNode) {};%
     }{%
-      \ifthenelse{\equal{\tikzumlCallReturn}{tikzumlEmpty}}{%
+      \ifstrequal{\tikzumlcallreturn}{tikzumlEmpty}{%
         \pgfmathsetmacro{\tikzumlCallPaddingd}{0.5*\tikzumlCallPadding}%
       }{%
         \pgfmathsetmacro{\tikzumlCallPaddingd}{1.2*\tikzumlCallPadding}%

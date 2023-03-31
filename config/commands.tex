@@ -463,6 +463,10 @@ major line width/.initial=1pt,
 \changemenucolor{gray}{txt}{named}{unibablueI}
 \fi
 
+%Uncomment, if not list of symbols is needed
+\newglossary[slg]{symbolslist}{syi}{syg}{Symbolslist} % create add. symbolslist
+\makeglossaries
+
 \newcommand{\cmark}{\ding{51}}%
 \newcommand{\xmark}{\ding{55}}%
 \newcommand*{\nodelabel}[1]{{\normalsize\bfseries\ttfamily #1}}%
@@ -486,7 +490,7 @@ major line width/.initial=1pt,
 
 \lstset{
   backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
-  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  basicstyle=\normalsize,        % the size of the fonts that are used for the code
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
   breaklines=true,                 % sets automatic line breaking
   captionpos=b,                    % sets the caption-position to bottom

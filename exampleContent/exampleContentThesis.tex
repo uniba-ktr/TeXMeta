@@ -3,9 +3,17 @@
 \newglossaryentry{latex}
 {
         name=latex,
-        description={Is a mark up language specially suited for
-scientific documents}
+        description={Is a mark up language specially suited for scientific documents}
 }
+
+\newglossaryentry{symb:Pi}
+{
+        name=\ensuremath{\pi},
+        description={Geometrical value},
+        type=symbolslist
+}
+
+\lstset{language=TeX}
 
 \chapter{Einleitung}\label{cha:ein}
 Einleitung nach \autoref{cha:ein}
@@ -14,41 +22,51 @@ Einleitung nach \autoref{cha:ein}
 \section{Bilder und Grafiken}\label{sec:grafiken}
 
 \subsection{Bilder}\label{subsec:bilder}
-Bilder befinden sich im Image-Ordner und lassen sich mit \textbackslash image\{Breite\}\{Datei im Image-Verzeichnis\}\{Beschriftung\}\{Label\} einbinden. \image{3cm}{logo.png}{Uni-Logo}{img:uni} Die Referenzierung erfolg mittels \textbackslash autoref\{Label\}, also z.B. \autoref{img:uni}.
+Bilder befinden sich im Image-Ordner und lassen sich mit \lstinline|\image{Breite}{Datei im Image-Verzeichnis}{Beschriftung}{Label}| einbinden. \image{3cm}{logo.png}{Uni-Logo}{img:uni} Die Referenzierung erfolg mittels \lstinline|\autoref{Label}|, also z.B. \autoref{img:uni}.
+
 \subsection{Grafiken mit TikZ}
-Grafiken im TikZ-Framework\footnote{\url{http://www.tn-home.de/TUGDD/Stuff/TikZ_final.pdf}} lassen sich mit dem Befehl \textbackslash scaletikzimage\{Datei im Image Verzeichnis\}\{Beschriftung\}\{Label\}\{Skalierungsfaktor\} einbinden. \scaletikzimage{tikz}{TikZ-Grafik}{img:tikz}{0.9}
+Grafiken im TikZ-Framework\footnote{\url{http://www.tn-home.de/TUGDD/Stuff/TikZ_final.pdf}} lassen sich mit dem Befehl \lstinline|\scaletikzimage{Datei im Image Verzeichnis}{Beschriftung}{Label}{Skalierungsfaktor}| einbinden. \scaletikzimage{tikz}{TikZ-Grafik}{img:tikz}{0.9}
 
 \subsubsection{Grafiken mit Moeptikz}
-Grafiken mit Netzwerksymbolen können einfach mit moeptikz\footnote{\url{https://github.com/moepinet/moeptikz}} erstellt werden:
+Grafiken mit Netzwerksymbolen können einfach mit moeptikz\footnote{\url{https://github.com/moepinet/moeptikz}} erstellt und mit \lstinline|\scaletikzimage{}{}{}| eingebunden werden:
 \scaletikzimage{network}{Example Network}{img:topo}{0.9}
 
 \subsubsection{Grafiken mit Tikz-UML}
-UML basierte Grafiken können einfach mit tikz-uml\footnote{\url{https://perso.ensta-paris.fr/~kielbasi/tikzuml/index.php}} erstellt werden:
+UML basierte Grafiken können einfach mit tikz-uml\footnote{\url{https://perso.ensta-paris.fr/~kielbasi/tikzuml/index.php}} erstellt werden und mit \lstinline|\scaletikzimage{}{}{}| eingebunden werden:
 \scaletikzimage{sequence}{Example Sequence}{img:seq}{0.9}
 
 \section{Tabellen}
-Tabellen lassen sich mit dem Environment\\
-\textbackslash begin\{longtable\}[H h t b c]\{Spaltendefinitionen\} ...\\
-\qquad\qquad \textbackslash caption\{Tabellenunterschrift\}\\
-\qquad\qquad \textbackslash label\{Label\}\\
-\textbackslash end\{longtable\}\\
- definieren\footnote{\url{ftp://ftp.dante.de/pub/tex/macros/latex/required/tools/longtable.pdf}}\\
+Tabellen, siehe \autoref{lst:table}, lassen sich mit dem Environment \lstinline|longtable| definieren\footnote{\url{ftp://ftp.dante.de/pub/tex/macros/latex/required/tools/longtable.pdf}}.
+
+\begin{lstlisting}[caption=Tabelle, language=TeX, label=lst:table]
+\begin{longtable}[H h t b c]{Spaltendefinitionen} \\
+Zelle 1 & Zelle 2 & ... & Zelle n \\
+... \\
+Zelle x & Zelle y & ... & Zelle z \\
+\caption{Tabellenunterschrift}
+\label{Label}
+\end{longtable}
+\end{lstlisting}
+
 \begin{longtable}[H]{|p{0.2\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|}
 \hline
-A&B&C\\
+Zelle 1 & Zelle 2 & Zelle n \\
+\hline
+Zelle x & Zelle y & Zelle z \\
 \hline
 \caption{Tabelle 1}
 \label{tab:tab1}
 \end{longtable}
 
+
 \section{Code-Ausschnitte}
 
 \subsection{Pseudo-Code}
-Pseudo-Code Ausschnitte lassen sich mit \textbackslash pseudo\{Name des Algorithmus\}\{Label\}\{Datei im Code-Verzeichnis\} einbinden.
+Pseudo-Code Ausschnitte lassen sich mit \lstinline|\pseudo{Name des Algorithmus}{Label}{Datei im Code-Verzeichnis}| einbinden.
 \pseudo{Mittelwert}{lst:mean}{code}
 
 \subsection{Programmiersprachen}
-Code Ausschnitte lassen sich einfach mit listings verwenden z.B. in der Umgebung \textbackslash begin\{lstlisting\} ... \textbackslash end\{lstlisting\}, wie in \autoref{lst:python} gezeigt.
+Code Ausschnitte lassen sich einfach mit listings verwenden z.B. in der Umgebung \lstinline|\begin{lstlisting} ... \end{lstlisting}|, wie in \autoref{lst:python} gezeigt.
 
 \begin{lstlisting}[language=Python, caption={Simple Python program}, label=lst:python]
 def my_function():
@@ -56,20 +74,28 @@ def my_function():
 \end{lstlisting}
 
 \section{Zitate}
-Mit \textbackslash nocite*\{\} lassen sich alle Einträge in der Bibliography ausgeben. Mit \textbackslash cite[S. xx]\{Key\} lassen sich Zitate einfügen. Z.B. \cite[S. 234]{Kurose12} \nocite*{}
+Mit \lstinline|\nocite*{}| lassen sich alle Einträge in der Bibliography ausgeben. Mit \lstinline|\cite[S. xx]{Key}| lassen sich Zitate einfügen. Z.B. \cite[S. 234]{Kurose12} \nocite*{}
+
 \section{Abkürzungen und Glossar}
 \subsection{Abkürzungen}
-Abkürzungen können mit \textbackslash newacronym\{ieee\}\{IEEE\}\{Institute of Electrical and Electronics Engineers\} angegeben werden. Diese werden alphabetisch sortiert in ein Abkürzungsverzeichnis aufgenommen und im Text z.b. mit \textbackslash gls\{ieee\} referenziert, dies führt bei Verwendung zu \gls{ieee}.
+Abkürzungen können mit \lstinline|\newacronym{ieee}{IEEE}{Institute of Electrical and Electronics Engineers}| angegeben werden. Diese werden alphabetisch sortiert in ein Abkürzungsverzeichnis aufgenommen und im Text z.B. mit \lstinline|\gls{ieee}| referenziert, dies führt bei Verwendung zu \gls{ieee}.
+
 \subsection{Glossar}
-Glossareinträge können, wie in \autoref{lst:tex} gezeigt, angelegt werden. Diese können im Text ebenfalls mit \textbackslash gls\{latex\} referenziert werden, z.B. \gls{latex}.
-\begin{lstlisting}[caption=Glossareinträge, label=lst:tex, language=TeX]
- \newglossaryentry{latex}
-{
+Glossareinträge können, wie in \autoref{lst:glossar} gezeigt, angelegt werden. Diese können im Text ebenfalls mit \lstinline|\gls{latex}| referenziert werden, z.B. \gls{latex}.
+\begin{lstlisting}[caption=Glossareinträge, label=lst:glossar, language=TeX]
+ \newglossaryentry{latex}{
         name=latex,
-        description={Is a mark up language specially suited for
-scientific documents}
-}
+        description={Is a mark up language specially suited for scientific documents}}
+\end{lstlisting}
+
+\subsection{Symbolverzeichnis}
+Symbole aus dem Symbolverzeichnis können ebenfalls mit \lstinline|\gls{symb:Pi}| genutzt werden und erzeugen dann \gls{symb:Pi}, wenn der Eintrag wie in \autoref{lst:symbol}
+\begin{lstlisting}[caption=Einträge für das Symbolverzeichnis, label=lst:symbol, language=TeX]
+\newglossaryentry{symb:Pi}{
+        name=\ensuremath{\pi},
+        description={Geometrical value},
+        type=symbolslist}
 \end{lstlisting}
 
 \section{Stichwortverzeichnis}
-Stichwörter\index{Stichwort} können mit \textbackslash index\{Stichwort\} angelegt werden. Weitere Schlagwörter\index{Stichwort!Schlagwort} hängt man mit \textbackslash index\{Stichwort!Schlagwort\} an \footnote{\url{http://www2.informatik.hu-berlin.de/~piefel/LaTeX-PS/V03-index.pdf}}.
+Stichwörter\index{Stichwort} können mit \lstinline|\index{Stichwort}| angelegt werden. Weitere Schlagwörter\index{Stichwort!Schlagwort} hängt man mit \lstinline|\index{Stichwort!Schlagwort}| an \footnote{\url{http://www2.informatik.hu-berlin.de/~piefel/LaTeX-PS/V03-index.pdf}}.

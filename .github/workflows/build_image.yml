@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+env:
+  REGISTRY: ghcr.io
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set time
+      run: echo "BUILD_DATE=$(date +%s)" >> $GITHUB_ENV
+    - name: Set year
+      run: echo "BUILD_YEAR=$(date +%Y)" >> $GITHUB_ENV
+    - name: downcase REPO
+      run: echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
+    - name: Checkout
+      uses: actions/checkout@v3.4.0
+    - name: Build the Docker image
+      run: docker build ./docker/ --file ./docker/Dockerfile --build-arg YEAR=${{ env.BUILD_YEAR }} --tag ${{ env.REGISTRY }}/latex:${{ env.BUILD_DATE }}

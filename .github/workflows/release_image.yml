@@ -39,10 +39,6 @@ jobs:
         with:
           images: |
             ghcr.io/${{ env.REPO }}
-          flavor: |
-            latest=true
-          tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push
         uses: docker/build-push-action@v4.0.0

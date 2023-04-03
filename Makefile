@@ -11,7 +11,7 @@ uid := $(shell id -u $$USER)
 gid := $(shell id -g $$USER)
 dockerabsvol := $(shell git rev-parse --show-toplevel)
 dockerincontainer := $(shell dirname $(shell git ls-tree --full-name --name-only HEAD Makefile))
-dockerimage := "ghcr.io/uniba-ktr/texmeta"
+dockerimage := "ghcr.io/uniba-ktr/texmeta:latest"
 # config
 prepared := .prepared
 latexmk_version := $(shell latexmk --version 2> /dev/null)
@@ -31,7 +31,7 @@ else
 endif
 
 # Call make init to create structure and update the meta files
-init: updateMeta packages.txt $(styles) $(bibtexstyles) $(classes)
+init: updateMeta $(styles) $(bibtexstyles) $(classes)
 	@echo "\nCopying styles and creating initial structure\n"
 	@mkdir -p graphic code images content
 
@@ -45,7 +45,7 @@ $(main): $(main).tex
 clean:
 	@echo "\nCleaning up latex crap\n"
 	@latexmk -c
-	@rm -f *.synctex.gz *.bbl *.nlo *.nls *.nav *.snm *.loa *.acn *.acr	*.alg	*.glg	*.glo	*.gls	*.ist *.glsdefs
+	@rm -f *.synctex.gz *.bbl *.nlo *.nls *.nav *.snm *.loa *.acn *.acr	*.alg	*.glg	*.glo	*.gls	*.ist *.glsdefs *.slg *.syg *.syi
 
 # Call make docker
 docker: preparedocker
@@ -91,6 +91,3 @@ $(classes): %.cls : $(meta)/style/%.cls
 $(hooks):
 	@cp $(gitinfohook) $(githooks)/$@
 	@chmod u+x $(githooks)/$@
-
-packages.txt: %.txt : $(meta)/config/tlmgr/%.txt
-	@cp $^ $@

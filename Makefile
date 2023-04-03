@@ -54,7 +54,7 @@ docker: preparedocker
 
 preparedocker:
 	@echo "\nPreparing Docker image\n"
-	@dockerimage=${dockerimage} $(MAKE) --environment-overrides -C docker
+	@dockerimage=${dockerimage} $(MAKE) --environment-overrides -C $(meta)/docker
 
 all: init $(main) clean
 	@echo "\nEverything is done and cleaned\n"

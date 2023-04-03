@@ -1,29 +1,57 @@
-name: Docker Image CI
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
 
-env:
-  REGISTRY: ghcr.io
-
+name: Create and inspect a Docker image
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - '**'
+      - '!main'
+    pull_request:
+      branches:
+        - 'main'
 
 jobs:
-
-  build:
+  build-image:
     runs-on: ubuntu-latest
-    steps:
+    permissions:
+      contents: read
+      packages: write
 
-    - name: Set time
-      run: echo "BUILD_DATE=$(date +%s)" >> $GITHUB_ENV
-    - name: Set year
-      run: echo "BUILD_YEAR=$(date +%Y)" >> $GITHUB_ENV
-    - name: downcase REPO
-      run: echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
-    - name: Checkout
-      uses: actions/checkout@v3.4.0
-    - name: Build the Docker image
-      run: docker build ./docker/ --file ./docker/Dockerfile --build-arg YEAR=${{ env.BUILD_YEAR }} --tag ${{ env.REGISTRY }}/latex:${{ env.BUILD_DATE }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.4.0
+
+      - name: downcase REPO
+        run: echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
+
+      - name: Set year
+        run: echo "BUILD_YEAR=$(date +%Y)" >> $GITHUB_ENV
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4.3.0
+        with:
+          images: |
+            ghcr.io/${{ env.REPO }}
+
+      - name: Build and load image
+        uses: docker/build-push-action@v4.0.0
+        with:
+          context: ./docker/
+          push: false
+          load: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: YEAR=${{ env.BUILD_YEAR }}
+
+      - name: Inspect Docker image
+        run: docker image inspect ghcr.io/${{ env.REPO }}

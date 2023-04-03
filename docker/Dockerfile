@@ -4,7 +4,7 @@ ARG YEAR
 ENV PATH=/usr/local/texlive/$YEAR/bin/x86_64-linux:/usr/local/texlive/$YEAR/bin/x86_64-linuxmusl:/usr/sbin:$PATH
 
 COPY config/ /usr/local/
-RUN apk add --no-cache perl wget tini gnupg gcc texlive && \
+RUN apk add --no-cache perl wget tini gnupg gcc texlive make git && \
     apk add --no-cache --virtual=.build-dependencies xz tar fontconfig-dev && \
     mkdir /tmp/install-tl-unx /workdir && \
     wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \

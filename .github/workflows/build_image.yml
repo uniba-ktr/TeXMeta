@@ -3,9 +3,8 @@
 # You can also reference a tag or branch, but the action may change without warning.
 
 name: Create and inspect a Docker image
+
 on:
-  schedule:
-    - cron: '*/5 * * * *'
   push:
     branches:
       - '**'

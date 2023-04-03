@@ -11,7 +11,7 @@ uid := $(shell id -u $$USER)
 gid := $(shell id -g $$USER)
 dockerabsvol := $(shell git rev-parse --show-toplevel)
 dockerincontainer := $(shell dirname $(shell git ls-tree --full-name --name-only HEAD Makefile))
-dockerimage := "testtex"
+dockerimage := "ghcr.io/uniba-ktr/texmeta"
 # config
 prepared := .prepared
 latexmk_version := $(shell latexmk --version 2> /dev/null)

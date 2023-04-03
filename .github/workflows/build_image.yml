@@ -5,7 +5,7 @@
 name: Create and inspect a Docker image
 on:
   schedule:
-    - cron: '45 * * * *'
+    - cron: '*/5 * * * *'
   push:
     branches:
       - '**'

@@ -11,6 +11,8 @@ on:
     pull_request:
       branches:
         - 'main'
+    schedule:
+      - cron: '30 * * * *'
 
 env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}

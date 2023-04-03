@@ -11,7 +11,7 @@ uid := $(shell id -u $$USER)
 gid := $(shell id -g $$USER)
 dockerabsvol := $(shell git rev-parse --show-toplevel)
 dockerincontainer := $(shell dirname $(shell git ls-tree --full-name --name-only HEAD Makefile))
-dockerimage := "ghcr.io/uniba-ktr/texmeta"
+dockerimage := "testtex"
 # config
 prepared := .prepared
 latexmk_version := $(shell latexmk --version 2> /dev/null)
@@ -54,7 +54,7 @@ docker: preparedocker
 
 preparedocker:
 	@echo "\nPreparing Docker image\n"
-	@dockerimage=${dockerimage} $(MAKE) --environment-overrides -C docker
+	@dockerimage=${dockerimage} $(MAKE) --environment-overrides -C $(meta)/docker
 
 all: init $(main) clean
 	@echo "\nEverything is done and cleaned\n"

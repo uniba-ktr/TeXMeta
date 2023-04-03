@@ -15,7 +15,6 @@ YEAR=$(shell date +%Y)
 
 # Call make docker
 pull:
-	@echo "\nChecking if image ${dockerimage} exists\n"
 ifeq (${IMAGE_EXISTS_REMOTE},0)
 	@echo "\nPulling image ${dockerimage}\n"
 	@docker pull ${dockerimage}

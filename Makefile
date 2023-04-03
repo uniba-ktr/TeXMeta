@@ -11,7 +11,7 @@ uid := $(shell id -u $$USER)
 gid := $(shell id -g $$USER)
 dockerabsvol := $(shell git rev-parse --show-toplevel)
 dockerincontainer := $(shell dirname $(shell git ls-tree --full-name --name-only HEAD Makefile))
-dockerimage := "whatever4711/latex"
+dockerimage := "ghcr.io/uniba-ktr/texmeta"
 # config
 prepared := .prepared
 latexmk_version := $(shell latexmk --version 2> /dev/null)
@@ -48,9 +48,13 @@ clean:
 	@rm -f *.synctex.gz *.bbl *.nlo *.nls *.nav *.snm *.loa *.acn *.acr	*.alg	*.glg	*.glo	*.gls	*.ist *.glsdefs
 
 # Call make docker
-docker:
+docker: preparedocker
 	@echo "\nDockerizing the build process\n"
-	@docker run --rm -v $(dockerabsvol)/:/src/ -w /src $(dockerimage) /bin/sh -c "apk add --update make git && cd $(dockerincontainer) && make && make clean && chown $(uid):$(gid) $(main).pdf"
+	@docker run --rm -v $(dockerabsvol)/:/src/ -w /src $(dockerimage) /bin/sh -c "cd $(dockerincontainer) && make && make clean && chown $(uid):$(gid) $(main).pdf"
+
+preparedocker:
+	@echo "\nPreparing Docker image\n"
+	@dockerimage=${dockerimage} $(MAKE) --environment-overrides -C docker
 
 all: init $(main) clean
 	@echo "\nEverything is done and cleaned\n"

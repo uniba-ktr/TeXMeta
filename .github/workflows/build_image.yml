@@ -12,6 +12,9 @@ on:
       branches:
         - 'main'
 
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+
 jobs:
   build-image:
     runs-on: ubuntu-latest
@@ -54,4 +57,4 @@ jobs:
           build-args: YEAR=${{ env.BUILD_YEAR }}
 
       - name: Inspect Docker image
-        run: docker image inspect ghcr.io/${{ env.REPO }}
+        run: docker image inspect ghcr.io/${{ env.REPO }}:${{ env.BRANCH_NAME }}

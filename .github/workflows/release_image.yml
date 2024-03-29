@@ -22,6 +22,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3.4.0
 
+      - name: Set 8.8.8.8 as dns server
+        run: |
+          sudo sed -i 's/#DNS=/DNS=8.8.8.8 8.8.4.4/g' /etc/systemd/resolved.conf
+          sudo systemctl daemon-reload
+          sudo systemctl restart systemd-networkd
+          sudo systemctl restart systemd-resolved
+
       - name: downcase REPO
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
 

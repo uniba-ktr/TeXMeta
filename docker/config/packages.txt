@@ -37,6 +37,7 @@ moreverb
 multirow
 nomencl
 paralist
+pdfrender
 pgf-umlsd
 pgfopts
 polynom
